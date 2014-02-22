@@ -1,3 +1,5 @@
+# author: Samuel Chen
+
 class Grid:
     def __init__(self, r, c):
         self.row = r

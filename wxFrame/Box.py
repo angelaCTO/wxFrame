@@ -1,7 +1,7 @@
 from Grid import Grid
 import wx
 
-''' A class for coloring in grid coordinates to reflect updating Grid '''
+''' A class for coloring in Grid coordinates '''
 
 class Box(wx.Panel):
     def __init__(self, parent, id, grid):

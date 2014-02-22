@@ -5,9 +5,9 @@ from Box import Box
 
 ''' A simple test driver for Frame/Grid program '''
 
-X_COORD = 0
-Y_COORD = 0
-BOX_WIDTH = 10
+X_COORD = 0            # Where to start coloring on Grid
+Y_COORD = 0            
+BOX_WIDTH = 10         # Dimensions of Grid boxes
 BOX_HEIGHT = 10
 
 def main():
@@ -17,7 +17,9 @@ def main():
     # Create the sample Frame
     frame = wx.Frame(None, -1, 'TestFrame.py')
 
-    # Testing Grid
+    # Testing Grid ... Setting values != 0 paints a 
+    # white box. Still need to figure out gradient coloring
+    # based on grid values.
     grid = Grid(32,31)
     grid.setValue(0,0,1)
     grid.setValue(23,18,1)

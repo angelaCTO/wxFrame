@@ -9,9 +9,11 @@ class Grid:
         self.maxSet = False
         self.avgSet = False
 
+    #
     def getRowLength(self):
         return self.row
 
+    #
     def getColLength(self):
         return self.column
 

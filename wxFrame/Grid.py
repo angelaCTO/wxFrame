@@ -17,24 +17,28 @@ class Grid:
             # Set alternating grid
             for y in range (self.column):
                 for x in range (self.row):
-                    if (x % 2 == 0 and y % 2 == 0):
+                    if ((x % 2 == 0) and (y % 2 == 0)):
                         self.setValue(x,y,0)
+                    if ((x % 2 == 1) and (y % 2 == 1)):
+                        self.setValue(x, y, 1)
             self.counter = 1
         else :
             for y in range (self.column):
                 for x in range (self.row):
-                    if (x % 2 == 0 and y % 2 == 0):
+                    if ((x % 2 == 0) and (y % 2 == 0)):
                         self.setValue(x,y,1)
+                    if ((x % 2 == 1) and (y % 2 == 1)):
+                        self.setValue(x, y, 1)
             self.counter = 0
 
-    # Test to generate random Grid
     def genRandGridTest(self):
-           for y in range (self.column):
-                for x in range (self.row):
-                    _value = random.randrange(0,255,1)
-                    _x = random.randrange(0,self.row,1)
-                    _y = random.randrange(0,self.column,1)
-                    self.setValue(_x,_y,_value)
+        for y in range (self.column):
+            for x in range (self.row):
+                _value = random.randrange(0,255,1)
+                _x = random.randrange(0,self.row,1)
+                _y = random.randrange(0,self.column,1)
+                self.setValue(_x,_y,_value)
+        print "grid id: ", random.randrange(0,100,1)
 
     def getRowLength(self):
         return self.row
@@ -57,7 +61,7 @@ class Grid:
         self.maxColumnIndex = maxIndex % self.column
         self.maxSet = True
 
-    def getMax(self):
+    def getMax(self): # Does this get max value ?
         return max(self.buffer)
 
     def getMin(self):

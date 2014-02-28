@@ -17,21 +17,21 @@ def main():
 
     grid = Grid(32,31)
     box = Box(frame, -1, grid, grid.toggleGridTest)
+    #box = Box(frame, -1, grid, grid.genRandGridTest)
 
+    print '1'
     box.timer.Start()
      
-    # Test to toggle alternating Grid boxes 
-    # grid.toggleGridTest()
-
-    # Test to randomly generate Grid 
-    grid.genRandGridTest()
-    
-    # NOTE: still need to implement value -> grayscale conversion
-    
+    print '2' 
+    grid.toggleGridTest()
+    #grid.genRandGridTest()
     box.Draw(grid,X_COORD,Y_COORD,BOX_WIDTH,BOX_HEIGHT)
      
+    print '3' 
     frame.Show(True)
+    print '4'
     app.MainLoop()
+    print '5'
         
 # Start
 if __name__ == '__main__':

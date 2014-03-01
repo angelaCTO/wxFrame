@@ -8,6 +8,7 @@ class Box(wx.Panel):
     ID_TIMER = 1
     def __init__(self, parent, id, grid, callbackFcn):
             wx.Panel.__init__(self, parent, id)
+            #wx.Color.__init__(self, parent, id)
             self.timer = wx.Timer(self, Box.ID_TIMER)
             self.callbackFcn = callbackFcn
             self.xCoord = 0
@@ -33,10 +34,8 @@ class Box(wx.Panel):
         while (yCoord  < grid.getColLength()):
             while (xCoord < grid.getRowLength()):
                 # Note: Need to translate grid values -> color gradient grid.value => grid.color
-                if (grid.getValue(xCoord, yCoord) == 0):
-                    color = "black"
-                else:
-                    color = "white"
+                value = grid.getValue(xCoord, yCoord)
+                color = wx.Colour(value, value, value)
                 self.DrawSquare(xCoord*xWidth, yCoord*yHeight, xWidth, yHeight, color)
                 xCoord += 1
             xCoord = 0

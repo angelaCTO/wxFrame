@@ -1,4 +1,5 @@
 import random
+import time
 
 class Grid:
     def __init__(self, r, c):
@@ -9,6 +10,7 @@ class Grid:
         self.maxSet = False
         self.avgSet = False
         self.counter = 0
+        self.colorValue = 0
 
     # Sets grid element values to alterate between 0 and 1 
     # for testing
@@ -40,6 +42,24 @@ class Grid:
                 self.setValue(_x,_y,_value)
         print "grid id: ", random.randrange(0,100,1)
 
+    # Incrementing value should change color value from 
+    # black to white
+    def incrementValueTest(self):
+        if (self.colorValue < 255):
+            print "color value: ", self.colorValue
+            self.setValue(1, 0, self.colorValue)
+            self.setValue(0, 1, self.colorValue)
+            self.setValue(23, 5, self.colorValue)
+            self.setValue(10, 20, self.colorValue)
+            self.setValue(29, 30, self.colorValue)
+            self.setValue(21, 12, self.colorValue)
+            self.setValue(15, 26, self.colorValue)
+            self.setValue(0, 19, self.colorValue)
+            self.setValue(23, 8, self.colorValue)
+            self.colorValue += 10
+        else:
+            self.colorValue = 0
+        
     def getRowLength(self):
         return self.row
 
@@ -53,7 +73,6 @@ class Grid:
         self.buffer[r * self.column + c] = value
         self.maxSet = False;
         self.avgSet = False;
-
     
     def updateMaxInformation(self):
         maxIndex = self.buffer.index(max(self.buffer)) 
@@ -67,14 +86,11 @@ class Grid:
     def getMin(self):
         return min(self.buffer)
 
-    # Converts value to greyscale
-    def getGrey(self, value):
-        # Convert singular value to RGB scale
-        _max = self.getMax()
-        _min = self.getMin()
-      
-       # Convert RGB to grayscale 
-       # return (0.21*R + 0.71*G + 0.07*B)
+    # Converts value to RGB tuple
+    def getRGB(self, value):
+        rgb = (value, value, value)
+        return rgb
+        #return (0.21*R + 0.71*G + 0.07*B)
     
     def getAvg(self) :
         return sum(self.buffer) / len (self.buffer) 

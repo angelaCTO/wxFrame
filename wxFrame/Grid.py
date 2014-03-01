@@ -1,4 +1,5 @@
-# author: Samuel Chen
+import random
+import time
 
 class Grid:
     def __init__(self, r, c):
@@ -8,12 +9,59 @@ class Grid:
         self.buffer = [0] * self.length
         self.maxSet = False
         self.avgSet = False
+        self.counter = 0
+        self.colorValue = 0
 
-    #
+    # Sets grid element values to alterate between 0 and 1 
+    # for testing
+    def toggleGridTest(self):
+        if self.counter == 0 :
+            for y in range (self.column):
+                for x in range (self.row):
+                    if ((x % 2 == 0) and (y % 2 == 0)):
+                        self.setValue(x,y,0)
+                    if ((x % 2 == 1) and (y % 2 == 1)):
+                        self.setValue(x, y, 1)
+            self.counter = 1
+        else :
+            for y in range (self.column):
+                for x in range (self.row):
+                    if ((x % 2 == 0) and (y % 2 == 0)):
+                        self.setValue(x,y,1)
+                    if ((x % 2 == 1) and (y % 2 == 1)):
+                        self.setValue(x, y, 1)
+            self.counter = 0
+
+    # Generates a random grid for testing
+    def genRandGridTest(self):
+        for y in range (self.column):
+            for x in range (self.row):
+                _value = random.randrange(0,255,1)
+                _x = random.randrange(0,self.row,1)
+                _y = random.randrange(0,self.column,1)
+                self.setValue(_x,_y,_value)
+
+    # Incrementing value should change color value from 
+    # black to white
+    def incrementValueTest(self):
+        if (self.colorValue < 255):
+            print "color value: ", self.colorValue
+            self.setValue(1, 0, self.colorValue)
+            self.setValue(0, 1, self.colorValue)
+            self.setValue(23, 5, self.colorValue)
+            self.setValue(10, 20, self.colorValue)
+            self.setValue(29, 30, self.colorValue)
+            self.setValue(21, 12, self.colorValue)
+            self.setValue(15, 26, self.colorValue)
+            self.setValue(0, 19, self.colorValue)
+            self.setValue(23, 8, self.colorValue)
+            self.colorValue += 10
+        else:
+            self.colorValue = 0
+        
     def getRowLength(self):
         return self.row
 
-    #
     def getColLength(self):
         return self.column
 
@@ -31,9 +79,12 @@ class Grid:
         self.maxColumnIndex = maxIndex % self.column
         self.maxSet = True
 
-    def getMax(self):
+    def getMax(self): # Does this get max value ?
         return max(self.buffer)
-    
+
+    def getMin(self):
+        return min(self.buffer)
+
     def getAvg(self) :
         return sum(self.buffer) / len (self.buffer) 
     
@@ -57,4 +108,3 @@ class Grid:
 
     def gridScalarMultiplication(self, scalar):
         self.buffer = [x*scalar for x in self.buffer]
-

@@ -86,12 +86,6 @@ class Grid:
     def getMin(self):
         return min(self.buffer)
 
-    # Converts value to RGB tuple
-    def getRGB(self, value):
-        rgb = (value, value, value)
-        return rgb
-        #return (0.21*R + 0.71*G + 0.07*B)
-    
     def getAvg(self) :
         return sum(self.buffer) / len (self.buffer) 
     

@@ -17,17 +17,15 @@ def main():
 
     grid = Grid(32,31)
     #box = Box(frame, -1, grid, grid.toggleGridTest)
-    #box = Box(frame, -1, grid, grid.genRandGridTest)
-    box = Box(frame, -1, grid, grid.incrementValueTest)
+    box = Box(frame, -1, grid, grid.genRandGridTest)
+    #box = Box(frame, -1, grid, grid.incrementValueTest)
 
-    box.timer.Start(5)  # Frame Rate 5 miliseconds
+    box.timer.Start(15)  # Frame Rate 5 miliseconds
     
-    print '1'
     #grid.toggleGridTest()
-    #grid.genRandGridTest()
-    grid.incrementValueTest()
+    grid.genRandGridTest()
+    #grid.incrementValueTest()
 
-    print '2'
     box.Draw(grid,X_COORD,Y_COORD,BOX_WIDTH,BOX_HEIGHT)
      
     frame.Show(True)

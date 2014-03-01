@@ -16,7 +16,6 @@ class Grid:
     # for testing
     def toggleGridTest(self):
         if self.counter == 0 :
-            # Set alternating grid
             for y in range (self.column):
                 for x in range (self.row):
                     if ((x % 2 == 0) and (y % 2 == 0)):
@@ -33,6 +32,7 @@ class Grid:
                         self.setValue(x, y, 1)
             self.counter = 0
 
+    # Generates a random grid for testing
     def genRandGridTest(self):
         for y in range (self.column):
             for x in range (self.row):
@@ -40,7 +40,6 @@ class Grid:
                 _x = random.randrange(0,self.row,1)
                 _y = random.randrange(0,self.column,1)
                 self.setValue(_x,_y,_value)
-        print "grid id: ", random.randrange(0,100,1)
 
     # Incrementing value should change color value from 
     # black to white

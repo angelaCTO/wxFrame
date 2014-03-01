@@ -1,4 +1,4 @@
-#! /usr/bin/python
+#/usr/bin/python
 from Grid import Grid
 from Box import Box
 import wx
@@ -16,22 +16,22 @@ def main():
     frame = wx.Frame(None, -1, 'TestFrame.py')
 
     grid = Grid(32,31)
-    box = Box(frame, -1, grid, grid.toggleGridTest)
+    #box = Box(frame, -1, grid, grid.toggleGridTest)
     #box = Box(frame, -1, grid, grid.genRandGridTest)
+    box = Box(frame, -1, grid, grid.incrementValueTest)
 
+    box.timer.Start(5)  # Frame Rate 5 miliseconds
+    
     print '1'
-    box.timer.Start()
-     
-    print '2' 
-    grid.toggleGridTest()
+    #grid.toggleGridTest()
     #grid.genRandGridTest()
+    grid.incrementValueTest()
+
+    print '2'
     box.Draw(grid,X_COORD,Y_COORD,BOX_WIDTH,BOX_HEIGHT)
      
-    print '3' 
     frame.Show(True)
-    print '4'
     app.MainLoop()
-    print '5'
         
 # Start
 if __name__ == '__main__':

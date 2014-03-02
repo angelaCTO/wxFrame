@@ -9,6 +9,7 @@ class Grid:
         self.buffer = [0] * self.length
         self.maxSet = False
         self.avgSet = False
+        # For testing ...
         self.counter = 0
         self.colorValue = 0
 

@@ -1,5 +1,8 @@
 import random
 import time
+import threading
+import Buffer
+
 
 class Grid:
     def __init__(self, r, c):
@@ -13,27 +16,16 @@ class Grid:
         self.counter = 0
         self.colorValue = 0
 
-    # Sets grid element values to alterate between 0 and 1 
-    # for testing
-    def toggleGridTest(self):
-        if self.counter == 0 :
-            for y in range (self.column):
-                for x in range (self.row):
-                    if ((x % 2 == 0) and (y % 2 == 0)):
-                        self.setValue(x,y,0)
-                    if ((x % 2 == 1) and (y % 2 == 1)):
-                        self.setValue(x, y, 1)
-            self.counter = 1
-        else :
-            for y in range (self.column):
-                for x in range (self.row):
-                    if ((x % 2 == 0) and (y % 2 == 0)):
-                        self.setValue(x,y,1)
-                    if ((x % 2 == 1) and (y % 2 == 1)):
-                        self.setValue(x, y, 1)
-            self.counter = 0
+    def updateBuffer(self):
+        tempBuffer = Buffer.getBuffer()
 
-    # Generates a random grid for testing
+        print "Temp", len(tempBuffer)
+        print tempBuffer[0]
+        for y in range (self.column):
+            for x in range (self.row):
+                _value = tempBuffer[x * self.column + y]
+                self.setValue(x,self.column - y - 1,_value)
+
     def genRandGridTest(self):
         for y in range (self.column):
             for x in range (self.row):
@@ -42,24 +34,6 @@ class Grid:
                 _y = random.randrange(0,self.column,1)
                 self.setValue(_x,_y,_value)
 
-    # Incrementing value should change color value from 
-    # black to white
-    def incrementValueTest(self):
-        if (self.colorValue < 255):
-            print "color value: ", self.colorValue
-            self.setValue(1, 0, self.colorValue)
-            self.setValue(0, 1, self.colorValue)
-            self.setValue(23, 5, self.colorValue)
-            self.setValue(10, 20, self.colorValue)
-            self.setValue(29, 30, self.colorValue)
-            self.setValue(21, 12, self.colorValue)
-            self.setValue(15, 26, self.colorValue)
-            self.setValue(0, 19, self.colorValue)
-            self.setValue(23, 8, self.colorValue)
-            self.colorValue += 10
-        else:
-            self.colorValue = 0
-        
     def getRowLength(self):
         return self.row
 

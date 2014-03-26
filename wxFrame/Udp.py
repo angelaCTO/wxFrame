@@ -5,10 +5,31 @@ import subprocess
 import re
 import socket
 import time
+import Buffer
 
 packet = [0] * 992
 udp_thread = None
-packetLock = threading.Lock()
+
+barrierLock = threading.Lock()
+barrier = False
+packetList = []
+
+def listReduce(a):
+    b= [0] * (len(a) / 2)
+    for i in range (len(a) / 2) :
+        #b[i] = int(ord(a[2*i])* 256 + ord(a[2*i + 1]))
+        b[i] = int(ord(a[2*i]))
+    return b
+
+def swap(a):
+    b = [0] * 992
+    for i in range(31) :
+        l = i * 32
+        for j in range (16) :
+            b[l + j] = a [l + 2*j]
+        for k in range (16) :
+            b[l + k + 16] = a [l + 2*k + 1]
+    return b
 
 class udp (threading.Thread):
     def __init__(self, threadID, name):
@@ -16,10 +37,11 @@ class udp (threading.Thread):
         self.threadID = threadID
         self.name = name
     def run(self):
-        global packet
+        global barrier
+
         print "Starting " + self.name
         #Init the packet
-        UDP_IP_RX = "192.168.240.2"
+        UDP_IP_RX = "192.168.240.3"
         UDP_IP_TX = "192.168.240.1"
         UDP_PORT = 30444
 
@@ -49,7 +71,18 @@ class udp (threading.Thread):
                     buffer = data
                 elif len(data) == 1054:
                     buffer = buffer + data
-                    print "received message len:", len(buffer)
+
+                    buffer = swap(listReduce(buffer))
+
+                    Buffer.setBuffer(buffer)
+
+                    print "Grid", len(buffer)
+                    print buffer[0]
+
+                    barrierLock.acquire()
+                    barrier = True
+                    barrierLock.release()
+
                 elif len(data) < 1000 :
                     print "received message len:", len(data)
                     print "received message :", data
@@ -62,8 +95,16 @@ class udp (threading.Thread):
 
 def init():
     global udp_thread
+    global barrier
+
     udp_thread = udp(1, "UDP Thread")
     udp_thread.start()
+    flag = False
+
+    while flag is False:
+        barrierLock.acquire()
+        flag = barrier
+        barrierLock.release()
 
 if __name__ == '__main__':
     init()
